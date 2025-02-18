@@ -5,6 +5,8 @@ author: Mike Chambers
 # Theme setting
 theme: minima
 
+google_analytics: G-GP9Z38FL6F 
+
 # Build settings
 markdown: kramdown
 plugins:
