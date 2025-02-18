@@ -7,6 +7,8 @@ image: /assets/images/darkmind-backdoor-mgc.png
 description: "Analysis of the DarkMind LLM backdoor research paper and why it's interesting but not a cause for immediate concern."
 ---
 
+<img src="{{ page.image }}" alt="DarkMind LLM Backdoor Visualization" class="post-header-image"/>
+
 A recent paper titled ["DarkMind: Latent Chain-of-Thought Backdoor in Customized LLMs"](https://arxiv.org/abs/2501.18617) has been making ripples amoungst AI Engineers social feeds. While the findings are fascinating from a research perspective, let's break down what this actually means for users of AI systems and why, while worth understanding, it's not a cause for immediate concern.
 
 ## The DarkMind Backdoor in a Nutshell
