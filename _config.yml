@@ -11,13 +11,15 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
 
-# Minima specific settings
 minima:
   date_format: "%b %-d, %Y"
   social_links:
-    - { platform: linkedin, user_url: "https://www.linkedin.com/in/mikegchambers" }
-    - { platform: bluesky, user_url: "https://bsky.app/profile/mikegchambers" }
-    - { platform: github, user_url: "https://github.com/mikegchambers" }
+    - title: LinkedIn
+      icon: linkedin
+      url: "https://www.linkedin.com/in/mikegchambers"
+    - title: BlueSky
+      icon: mastodon  # Using mastodon icon as placeholder since BlueSky doesn't have a dedicated icon yet
+      url: "https://bsky.app/profile/mikegchambers.com"
 
 # Show excerpts on the home page
 show_excerpts: true
