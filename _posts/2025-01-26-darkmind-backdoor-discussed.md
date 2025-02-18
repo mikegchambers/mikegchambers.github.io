@@ -1,7 +1,9 @@
+---
 layout: post
 title: "Understanding the DarkMind LLM Backdoor: Interesting But Not Alarming"
 date: 2025-01-26
-categories: LLMS Security
+categories: [LLMs, Security]
+---
 
 # Understanding the DarkMind LLM Backdoor: Interesting But Not Alarming
 
