@@ -1,6 +1,23 @@
-remote_theme: pages-themes/cayman@v0.2.0
-plugins:
-- jekyll-remote-theme
+title: Mike Chambers - AI/ML Notes
+description: Personal notes and observations on artificial intelligence and machine learning
+author: Mike Chambers
 
-title: Mike's Notes
-description: Notes, mostly on AI/ML, mostly on AI Engineering.
+# Theme setting
+theme: minima
+
+# Build settings
+markdown: kramdown
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Minima specific settings
+minima:
+  date_format: "%b %-d, %Y"
+  social_links:
+    - { platform: linkedin, user_url: "https://www.linkedin.com/in/mikegchambers" }
+    - { platform: bluesky, user_url: "https://bsky.app/profile/mikegchambers" }
+    - { platform: github, user_url: "https://github.com/mikegchambers" }
+
+# Show excerpts on the home page
+show_excerpts: true
