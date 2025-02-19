@@ -3,7 +3,7 @@ description: Personal notes and observations on artificial intelligence and mach
 author: Mike Chambers
 
 # Theme setting
-theme: minima
+remote_theme: jekyll/minima
 
 google_analytics: G-GP9Z38FL6F 
 
@@ -12,6 +12,7 @@ markdown: kramdown
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-remote-theme
 
 minima:
   date_format: "%b %-d, %Y"
