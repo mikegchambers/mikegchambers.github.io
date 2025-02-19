@@ -1,6 +1,9 @@
 title: Mike Chambers - AI/ML Notes
 description: Personal notes and observations on artificial intelligence and machine learning
-author: Mike Chambers
+
+author:
+  name: Mike Chambers
+  email: "mike@mikegchambers.com"
 
 # Theme setting
 remote_theme: jekyll/minima
@@ -27,5 +30,5 @@ minima:
       icon: bluesky
       url: "https://bsky.app/profile/mikegchambers.com"
 
-# Show excerpts on the home page
-show_excerpts: true
+  # Show excerpts on the home page
+  show_excerpts: true
