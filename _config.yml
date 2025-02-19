@@ -21,7 +21,7 @@ minima:
       icon: linkedin
       url: "https://www.linkedin.com/in/mikegchambers"
     - title: BlueSky
-      icon: mastodon  # Using mastodon icon as placeholder since BlueSky doesn't have a dedicated icon yet
+      icon: bluesky
       url: "https://bsky.app/profile/mikegchambers.com"
 
 # Show excerpts on the home page
