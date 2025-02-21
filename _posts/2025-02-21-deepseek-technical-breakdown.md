@@ -3,7 +3,7 @@ layout: post
 title: "Exploring the Depths of DeepSeek R1: A Comprehensive Technical Review"
 date: 2025-02-21
 categories: [LLMs]
-image: /assets/images/deepseek-whale.png
+image: /assets/images/deepseek-whale.jpg
 description: "A technical deep-dive into DeepSeek R1's architecture, training methodology, and performance, exploring how its novel reinforcement learning approach and MoE design advance AI reasoning capabilities."
 ---
 
