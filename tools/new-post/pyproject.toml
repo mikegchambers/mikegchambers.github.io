@@ -1,0 +1,17 @@
+[project]
+name = "new-post"
+version = "0.1.0"
+description = "CLI tool to create a blog post from a YouTube video URL"
+requires-python = ">=3.10"
+dependencies = [
+    "boto3",
+    "yt-dlp",
+    "requests",
+]
+
+[project.scripts]
+new-post = "new_post:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

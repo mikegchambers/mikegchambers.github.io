@@ -1,0 +1,6 @@
+- name: Lambda-MCP-Server
+  repo: mikegc-aws/Lambda-MCP-Server
+  description: Creates a simple MCP tool server with streamable HTTP, deployed on AWS Lambda.
+  language: Python
+  language_color: "#3572A5"
+  stars: 231
