@@ -2,7 +2,7 @@
 title: "Model Driven Agents - Strands Agents (A New Open Source, Model First, Framework for Agents)"
 date: 2025-05-16
 categories: [AI, Agents]
-tags: [agents, rag, deployment, tools, video]
+tags: [agents, strands, amazon-bedrock, rag, deployment, tools, video]
 description: "Agent frameworks getting in your way? Meet Strands Agents, an open-source framework that leverages the full power of modern Language Models. Built and productio"
 ---
 

@@ -2,7 +2,7 @@
 title: "Amazon Bedrock: Your Top Questions Answered"
 date: 2023-11-24
 categories: [AI, Tutorials]
-tags: [amazon-bedrock, video]
+tags: [amazon-bedrock, inference, video]
 description: "In this video Mike reviews how to get started with Amazon Bedrock, and addresses your top questions about enabling access to foundation models in the Amazon Bed"
 ---
 

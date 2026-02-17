@@ -2,7 +2,7 @@
 title: "Can I Really Order a Pizza With Claude Sonnet 3.5 - Computer Use?"
 date: 2024-11-01
 categories: [AI, Tutorials]
-tags: [claude, video]
+tags: [claude, computer-use, video]
 description: "In this video Mike experiments with Anthropic's latest model Claude Sonnet 3.5 v2.  Sonnet now has support for 'computer use'. Can Claude control Mike's compute"
 ---
 

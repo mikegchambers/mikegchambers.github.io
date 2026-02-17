@@ -2,7 +2,7 @@
 title: "Claude Rickrolled me! - Sonnet 3.5 v2 Computer Control"
 date: 2024-10-24
 categories: [AI, Tutorials]
-tags: [claude, video]
+tags: [claude, computer-use, video]
 description: "hello and yes the internet is a buzz with the fact that anthropic dropped a new model Sonet 4 is no not Sonet 4 Sonet 3.5 version two is here and it shows some "
 ---
 

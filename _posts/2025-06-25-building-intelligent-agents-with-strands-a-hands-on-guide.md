@@ -2,7 +2,7 @@
 title: "Building Intelligent Agents with Strands: A Hands-On Guide"
 date: 2025-06-25
 categories: [AI, Agents]
-tags: [agents, rag, tools, video]
+tags: [agents, strands, amazon-bedrock, rag, tools, video]
 description: "In this tutorial, we dive into the world of Strands Agents, a lightweight SDK that simplifies the process of building intelligent agents powered by large langua"
 ---
 

@@ -2,7 +2,7 @@
 title: "Strands Tools: Building Custom AI Agents with Python"
 date: 2025-07-03
 categories: [AI, Agents]
-tags: [agents, tools, video]
+tags: [agents, strands, tools, video]
 description: "In this video, we'll explore how to use Strands Tools to create custom AI agents with Python. You'll learn how to incorporate built-in tools like file reading, "
 ---
 

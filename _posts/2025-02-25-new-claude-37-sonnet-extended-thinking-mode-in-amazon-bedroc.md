@@ -2,7 +2,7 @@
 title: "NEW Claude 3.7 Sonnet - Extended thinking mode in Amazon Bedrock (with code!)"
 date: 2025-02-25
 categories: [AI, Tutorials]
-tags: [amazon-bedrock, claude, video]
+tags: [amazon-bedrock, claude, extended-thinking, video]
 description: "Walk through how to use Claude 3.7 Sonnet extended thinking mode in Amazon Bedrock."
 ---
 

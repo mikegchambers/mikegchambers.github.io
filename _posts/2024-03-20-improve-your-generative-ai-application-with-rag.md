@@ -2,7 +2,7 @@
 title: "Improve your Generative AI Application with RAG"
 date: 2024-03-20
 categories: [AI, Tutorials]
-tags: [rag, video]
+tags: [amazon-bedrock, rag, video]
 description: "Let’s break down the complexities of generative AI with this easy-to-understand back to basics introduction. In this video, Mike and Tiffany explain the fundame"
 ---
 

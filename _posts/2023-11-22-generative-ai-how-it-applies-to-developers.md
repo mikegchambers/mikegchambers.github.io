@@ -2,7 +2,7 @@
 title: "Generative AI & How it Applies to Developers"
 date: 2023-11-22
 categories: [AI, Tutorials]
-tags: [tools, video]
+tags: [amazon-bedrock, generative-ai, tools, video]
 description: "How can Generative AI benefit developers and make their jobs easier? In this video, AWS Developer Advocates Derek Bingham & Mike Chambers break down how Generat"
 ---
 

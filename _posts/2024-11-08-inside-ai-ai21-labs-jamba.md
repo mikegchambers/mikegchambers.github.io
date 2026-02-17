@@ -2,7 +2,7 @@
 title: "Inside AI: - AI21 Labs Jamba"
 date: 2024-11-08
 categories: [AI, Tutorials]
-tags: [amazon-bedrock, video]
+tags: [amazon-bedrock, ai21, jamba, video]
 description: "In this video Mike talks to Yuval Belfer from AI21 Labs about LLM model architectures, Mamba, Mixture of Experts, and Jamba at AWS's gen AI loft space in San Fr"
 ---
 

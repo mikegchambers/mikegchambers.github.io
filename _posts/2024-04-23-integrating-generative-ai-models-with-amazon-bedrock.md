@@ -2,7 +2,7 @@
 title: "Integrating Generative AI Models with Amazon Bedrock"
 date: 2024-04-23
 categories: [AI, Tutorials]
-tags: [amazon-bedrock, video]
+tags: [amazon-bedrock, inference, video]
 description: "🌟 Get started today with Amazon Bedrock:"
 ---
 
