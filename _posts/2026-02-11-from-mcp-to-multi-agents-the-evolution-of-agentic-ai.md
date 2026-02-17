@@ -1,6 +1,6 @@
 ---
 title: "From MCP to Multi-Agents: The Evolution of Agentic AI (and What's Next)"
-date: 2025-02-11
+date: 2026-02-11
 categories: [AI, Agents]
 tags: [podcast, agents, mcp, strands, claude]
 description: "Mike joins the AWS Developers Podcast to discuss the evolution of agentic AI, MCP challenges, lightweight frameworks, and what's next for AI agents in 2025."
