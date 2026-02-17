@@ -3,7 +3,7 @@ title: "From MCP to Multi-Agents: The Evolution of Agentic AI (and What's Next)"
 date: 2026-02-11
 categories: [AI, Agents]
 tags: [podcast, agents, mcp, strands, claude]
-description: "Mike joins the AWS Developers Podcast to discuss the evolution of agentic AI, MCP challenges, lightweight frameworks, and what's next for AI agents in 2025."
+description: "Mike joins the AWS Developers Podcast to discuss the evolution of agentic AI, MCP challenges, lightweight frameworks, and what's next for AI agents."
 ---
 
 I joined the AWS Developers Podcast for a conversation about where agentic AI is heading. We covered a lot of ground in just over an hour — from the evolution of the Model Context Protocol (MCP) and its real-world challenges, to why lightweight agent frameworks like Strands are gaining traction, to the security concerns that come with giving agents access to your filesystem and command line.
