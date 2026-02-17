@@ -1,0 +1,19 @@
+{
+  "name": "Mike Chambers",
+  "short_name": "Mike C",
+  "icons": [
+    {
+      "src": "/assets/img/favicons/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/img/favicons/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#2d2d2d",
+  "background_color": "#2d2d2d",
+  "display": "standalone"
+}
