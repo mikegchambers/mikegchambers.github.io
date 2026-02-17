@@ -4,3 +4,10 @@
   language: Python
   language_color: "#3572A5"
   stars: 231
+
+- name: async-agentic-tools
+  repo: mikegc-aws/async-agentic-tools
+  description: True async agentic tools — the model keeps talking while tools run in the background.
+  language: Python
+  language_color: "#3572A5"
+  stars: 0
