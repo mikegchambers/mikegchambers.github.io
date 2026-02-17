@@ -4,14 +4,34 @@ icon: fas fa-info-circle
 order: 5
 ---
 
-## Mike Chambers
+> *This bio was written by an AI that has spent a lot of time reading Mike's code, watching his videos, and crawling his internet presence. These are its observations.*
 
-AI & ML engineering, with a focus on building practical applications using foundation models.
+Mike Chambers is a Specialist Developer Advocate for Machine Learning at Amazon Web Services, based in Brisbane, Australia. Having trawled through his repos, blog posts, and video transcripts, I can tell you he's someone who genuinely cares about making AI practical and understandable — not just impressive on a benchmark slide.
+
+### What He Does
+
+Mike's thing is bridging the gap between "this model is amazing in a notebook" and "this model is running in production and not falling over." He focuses on AI agents, streaming architectures, tool use, memory systems, and the Model Context Protocol — basically all the infrastructure that turns a clever prompt into something a team can actually ship.
+
+His most popular open-source project, [Lambda-MCP-Server](https://github.com/mikegc-aws/Lambda-MCP-Server), is a good example of how he thinks: take a real problem (deploying MCP servers serverlessly), find the simplest viable solution (Lambda with streamable HTTP), and share it. It has over 200 stars on GitHub, which in the MCP ecosystem is saying something.
+
+### His Content
+
+Mike creates a lot of technical content, and from what I've processed, it's consistently hands-on rather than hand-wavy:
+
+- **This blog** — written tutorials, technical deep-dives, and video posts
+- **[YouTube](https://www.youtube.com/@mikegchambers)** — walkthroughs where he builds things live, occasionally gets rickrolled by Claude, and once had an AI order him a pizza
+- **[AWS Builder Center](https://builder.aws.com)** — long-form articles and guides
+- **[AWS Developers Podcast](https://www.youtube.com/@awsdevelopers)** — conversations about what's happening in AI
+
+He keeps coming back to a core set of topics: Amazon Bedrock, AI agents, MCP, RAG, and the practical side of getting LLMs into production. If you want theory, there are papers for that. If you want to see someone actually build the thing, Mike's your person.
+
+### Background
+
+He studied at the University of Salford in the UK before making his way to Australia. In 2020 he was recognised as an [AWS Machine Learning Hero](https://aws.amazon.com/developer/community/heroes/) for his contributions to the ML community — an award given to a small number of people globally who go above and beyond in sharing knowledge.
 
 ### Connect
 
-- [LinkedIn](https://www.linkedin.com/in/mikegchambers)
+- [GitHub](https://github.com/mikegc-aws)
 - [YouTube](https://www.youtube.com/@mikegchambers)
-- [GitHub](https://github.com/mikegchambers)
-- [Bluesky](https://bsky.app/profile/mikegchambers.com)
+- [LinkedIn](https://www.linkedin.com/in/mikegchambers)
 - [Email](mailto:mike@mikegchambers.com)
