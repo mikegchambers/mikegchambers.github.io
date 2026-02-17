@@ -8,6 +8,8 @@ description: "Every agent framework blocks while tools run. This post walks thro
 
 Every AI agent framework today follows the same basic loop: the model thinks, it calls some tools, it waits for all the tools to finish, and then it thinks again. On one hand that loop works fine when your tools return in seconds or when your agent is headless, but on the other it causes millions of people every day to stare blankly for hours (in total) at a "thinking" message. Where's the productivity gain in that? :)
 
+**Skip to the code: [here](#how-it-works-the-code).**
+
 If you've used (or built) agents that call APIs with variable latency, run database queries, kick off web searches, or - of course - used agents as tools, you've felt this. The model sits idle, the user sits idle, and a 30-second tool call holds up the response to a 3-second one that could have finished ages ago. The agent can't talk to the user, can't start processing partial results, can't do anything.
 
 Modern frontier models now have the ability to start experimenting with genuine asynchronous tool calls. This post walks through my experimental approach: true asynchronous agentic tools. The demo is built on the [Strands Agents SDK](https://github.com/strands-agents/sdk-python), but the pattern should apply to any agent framework with a tool-calling loop. The code is open, the approach is simple, and it requires zero changes to how you write your tools.
