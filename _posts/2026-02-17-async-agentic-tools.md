@@ -10,6 +10,7 @@ Every AI agent framework today follows the same basic loop: the model thinks, it
 
 **Skip to the code: [here](#how-it-works-the-code).**
 
+**Quick walkthrough video here:** 
 [![Watch the video](https://img.youtube.com/vi/VYLBCoxbPE8/maxresdefault.jpg)](https://youtu.be/VYLBCoxbPE8)
 
 If you've used (or built) agents that call APIs with variable latency, run database queries, kick off web searches, or - of course - used agents as tools, you've felt this. The model sits idle, the user sits idle, and a 30-second tool call holds up the response to a 3-second one that could have finished ages ago. The agent can't talk to the user, can't start processing partial results, can't do anything.
