@@ -1,5 +1,5 @@
 ---
-title: "Software 3.1: AI Functions"
+title: "Software 3.1? - AI Functions"
 date: 2026-02-24
 categories: [AI, Agents]
 tags: [ai, software-development, strands, python, ai-functions, agents]
