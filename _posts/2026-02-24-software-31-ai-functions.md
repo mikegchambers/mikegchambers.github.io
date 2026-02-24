@@ -4,6 +4,9 @@ date: 2026-02-24
 categories: [AI, Agents]
 tags: [ai, software-development, strands, python, ai-functions, agents]
 description: "Moving beyond Software 3.0's generate-and-verify loop, AI Functions execute LLM-generated code at runtime, return native Python objects, and use automated post-conditions for continuous verification. This is Software 3.1: where AI doesn't just write code—it runs it."
+image:
+  path: /assets/images/ai-functions.png
+  alt: AI Functions
 ---
 
 Andrej Karpathy has a version numbering scheme for how software gets written. Software 1.0 is code written by humans. Software 2.0 is neural network weights learned through optimization. Software 3.0 is prompting LLMs in plain language, and sounds nicer than calling it vibe coding, which, fun-fact is a also a Karpathy coined term.
