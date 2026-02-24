@@ -5,7 +5,7 @@ categories: [AI, Agents]
 tags: [ai, software-development, strands, python, ai-functions, agents]
 description: "Moving beyond Software 3.0's generate-and-verify loop, AI Functions execute LLM-generated code at runtime, return native Python objects, and use automated post-conditions for continuous verification. This is Software 3.1: where AI doesn't just write code—it runs it."
 image:
-  path: /assets/images/ai-functions.png
+  path: /assets/images/ai-functions-2.png
   alt: AI Functions
 ---
 
