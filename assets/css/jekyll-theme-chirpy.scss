@@ -14,3 +14,9 @@
 #sidebar .site-title {
   font-size: 1.35rem;
 }
+
+/* Ensure post preview images are visible in list views */
+.card-img-top {
+  display: block !important;
+  visibility: visible !important;
+}
