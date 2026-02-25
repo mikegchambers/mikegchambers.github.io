@@ -9,6 +9,10 @@ image:
   alt: AI Functions
 ---
 
+### Watch: AI Functions Deep Dive
+
+{% include embed/youtube.html id='ggWaZO13onc' %}
+
 Andrej Karpathy has a version numbering scheme for how software gets written. Software 1.0 is code written by humans. Software 2.0 is neural network weights learned through optimization. Software 3.0 is prompting LLMs in plain language, and sounds nicer than calling it vibe coding, which, fun-fact is a also a Karpathy coined term.
 
 Of course, Software 3.0 is real. Millions of people are using it daily. Tools like Kiro, Cursor, Claude Code, and ChatGPT let you describe what you want and get code back. Karpathy [emphasizes](https://www.ycombinator.com/library/MW-andrej-karpathy-software-is-changing-again) a ‘generation–verification loop’ in partial-autonomy tools: the model generates changes, a human verifies them, and the work iterates.
