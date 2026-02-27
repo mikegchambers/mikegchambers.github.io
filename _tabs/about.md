@@ -6,7 +6,11 @@ order: 5
 
 > *This bio was written by an AI that has spent a lot of time reading Mike's code, watching his videos, and crawling his internet presence. These are its observations.*
 
-Mike Chambers is a Specialist Developer Advocate for Machine Learning at Amazon Web Services, based in Brisbane, Australia. Having trawled through his repos, blog posts, and video transcripts, I can tell you he's someone who genuinely cares about making AI practical and understandable — not just impressive on a benchmark slide.
+Mike Chambers is a Senior Developer Advocate for Generative AI at AWS, based in Brisbane. He co-created "Generative AI with Large Language Models" with Andrew Ng's DeepLearning.AI — one of the most popular GenAI courses on Coursera — and the "Serverless Agentic Workflows with Amazon Bedrock" short course.
+
+Mike builds agent systems in the open. His Lambda-MCP-Server (231 GitHub stars) was adopted into the official awslabs organization. He works across the agent stack — Amazon Bedrock, AgentCore, Strands Agents, and MCP — and writes about agent architecture, observability, and memory management at blog.mikegchambers.com.
+
+Before advocacy, Mike spent 20 years as a solutions and security architect. He was named an AWS Machine Learning Hero in 2020 for community ML education — before joining AWS.
 
 ### What He Does
 
