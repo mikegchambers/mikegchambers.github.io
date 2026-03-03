@@ -58,7 +58,7 @@ It's a single Python file — about 550 lines — running a standard library HTT
 2. It serves a lightweight shell page: an empty `<div>`, a loading spinner, and a block of vanilla JavaScript that knows how to receive and render content.
 3. The shell page immediately fires a POST request back to the server with the session ID and the prompt.
 
-The agent then does what it does. It reads the prompt — "Generate a page for: languga e translation app" — and calls its first tool: `render_page`. This tool takes three arguments: a title, HTML body content, and CSS. The agent generates all three. The server returns them as JSON. The shell page injects the HTML into the DOM and the CSS into a style tag. The spinner fades out. The app appears.
+The agent then does what it does. It reads the prompt — "Generate a page for: language translation app" — and calls its first tool: `render_page`. This tool takes three arguments: a title, HTML body content, and CSS. The agent generates all three. The server returns them as JSON. The shell page injects the HTML into the DOM and the CSS into a style tag. The spinner fades out. The app appears.
 
 Here is the `render_page` tool in its entirety:
 
