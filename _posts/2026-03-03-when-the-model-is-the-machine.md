@@ -16,6 +16,8 @@ The agent that built this has exactly two tools. One generates an HTML page. The
 
 Yes, this ultimate **everything** app is a party trick, and I want to be upfront about that. It's slow. It's a concept. But I think it points at something real, and I've spent the last few weeks trying to articulate what that something is.
 
+> Want to play? The code is here: [github.com/mikegc-aws/www4](https://github.com/mikegc-aws/www4)
+
 ---
 
 ## A Trillion Dollars of Doubt
