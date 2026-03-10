@@ -4,6 +4,7 @@ date: 2026-03-10
 categories: [AI, Agents]
 tags: [ai, context-hub, andrew-ng, api-documentation, coding-agents, skills]
 description: "Context Hub is a curated documentation registry for coding agents. Here's how to add your API before someone else does."
+image: /assets/images/context-hub.jpg
 ---
 
 Andrew Ng's new open-source project, [Context Hub](https://github.com/andrewyng/context-hub), attempts to solve a problem every API provider has right now whether they know it or not. Coding agents are getting your API wrong.
