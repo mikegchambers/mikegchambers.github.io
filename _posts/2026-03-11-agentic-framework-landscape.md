@@ -18,18 +18,18 @@ This isn't a ranking. It's a snapshot of where things stand in March 2026, with 
 
 ## The Field
 
-Nine frameworks made this list. Not because they're the only ones, but because they're the ones developers are actually using, talking about, and building production systems with. Here they are, ordered by GitHub stars:
+Nine frameworks made this list. Not because they're the only ones, but because they're the ones developers are actually using, talking about, and building production systems with.
 
 | Framework | Stars | Age (months) | Last 6 months | License | Primary Backer |
 |---|---|---|---|---|---|
 | AutoGen | 55.4K | 31 | +1,982 | MIT + CC-BY-4.0 | Microsoft |
-| LlamaIndex | 47.6K | 40 | +1,183 | MIT | LlamaIndex Inc |
 | CrewAI | 45.7K | 28 | +2,540 | MIT | CrewAI Inc |
-| LangGraph | 26.1K | 31 | +2,351 | MIT | LangChain |
-| Smolagents | 25.9K | 15 | +1,018 | Apache-2.0 | Hugging Face |
-| OpenAI Agents SDK | 19.7K | 12 | +1,554 | MIT | OpenAI |
 | Google ADK | 18.3K | 11 | +1,900 | Apache-2.0 | Google |
+| LangGraph | 26.1K | 31 | +2,351 | MIT | LangChain |
+| LlamaIndex | 47.6K | 40 | +1,183 | MIT | LlamaIndex Inc |
+| OpenAI Agents SDK | 19.7K | 12 | +1,554 | MIT | OpenAI |
 | Pydantic AI | 15.4K | 21 | +996 | MIT | Pydantic |
+| Smolagents | 25.9K | 15 | +1,018 | Apache-2.0 | Hugging Face |
 | Strands Agents | 5.3K | 10 | +618 | Apache-2.0 | AWS |
 
 *Methodology: Stars and Age come from GitHub's API. "Age" is measured from the repo's first stargazer event, not its creation date. "Last 6 months" is calculated from monthly star history via the [OSS Insight API](https://ossinsight.io/). All data collected March 2026.*
