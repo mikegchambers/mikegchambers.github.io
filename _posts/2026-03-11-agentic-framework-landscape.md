@@ -68,24 +68,25 @@ These frameworks aren't interchangeable. They reflect different ideas about how 
 
 ## Show Me the Code
 
-The best way to understand the difference is to see the same thing built nine ways. Here's the simplest possible pattern. Create an agent with one tool, run it.
+The best way to understand the difference is to see the same thing built nine ways. Here's the simplest possible pattern: create an agent with one tool, run it.
 
 ### Strands Agents
 
 ```python
 from strands import Agent, tool
+import random
 
 @tool
-def weather(city: str) -> str:
-    """Get the current weather for a city.
+def roll_dice(sides: int) -> str:
+    """Roll a dice with the given number of sides.
 
     Args:
-        city: Name of the city
+        sides: Number of sides on the dice
     """
-    return f"It's sunny in {city}"
+    return f"You rolled a {random.randint(1, sides)}"
 
-agent = Agent(tools=[weather])
-response = agent("What's the weather in London?")
+agent = Agent(tools=[roll_dice])
+response = agent("Roll a 20-sided dice for me")
 print(response)
 ```
 
@@ -93,7 +94,7 @@ Three imports, a decorated function, two lines to run. The `@tool` decorator pul
 
 ```python
 from strands.models import OpenAIModel
-agent = Agent(model=OpenAIModel(model_id="gpt-4o"), tools=[weather])
+agent = Agent(model=OpenAIModel(model_id="gpt-4o"), tools=[roll_dice])
 ```
 
 ### LangGraph
@@ -101,16 +102,17 @@ agent = Agent(model=OpenAIModel(model_id="gpt-4o"), tools=[weather])
 ```python
 from langchain.chat_models import init_chat_model
 from langgraph.prebuilt import create_react_agent
+import random
 
-def weather(city: str) -> str:
-    """Get the current weather for a city."""
-    return f"It's sunny in {city}"
+def roll_dice(sides: int) -> str:
+    """Roll a dice with the given number of sides."""
+    return f"You rolled a {random.randint(1, sides)}"
 
 model = init_chat_model("anthropic:claude-sonnet-4-20250514")
-agent = create_react_agent(model, tools=[weather])
+agent = create_react_agent(model, tools=[roll_dice])
 
 result = agent.invoke(
-    {"messages": [{"role": "user", "content": "What's the weather in London?"}]}
+    {"messages": [{"role": "user", "content": "Roll a 20-sided dice for me"}]}
 )
 print(result["messages"][-1].content)
 ```
@@ -122,26 +124,27 @@ LangGraph's prebuilt `create_react_agent` keeps it relatively simple for basic c
 ```python
 from crewai import Agent, Task, Crew
 from crewai.tools import tool
+import random
 
 @tool
-def weather(city: str) -> str:
-    """Get the current weather for a city."""
-    return f"It's sunny in {city}"
+def roll_dice(sides: int) -> str:
+    """Roll a dice with the given number of sides."""
+    return f"You rolled a {random.randint(1, sides)}"
 
-researcher = Agent(
-    role="Weather Reporter",
-    goal="Report the weather accurately",
-    backstory="You are an experienced meteorologist",
-    tools=[weather],
+roller = Agent(
+    role="Dice Roller",
+    goal="Roll dice accurately when asked",
+    backstory="You are a tabletop gaming assistant",
+    tools=[roll_dice],
 )
 
 task = Task(
-    description="What's the weather in London?",
-    expected_output="A weather report",
-    agent=researcher,
+    description="Roll a 20-sided dice for me",
+    expected_output="A dice roll result",
+    agent=roller,
 )
 
-crew = Crew(agents=[researcher], tasks=[task])
+crew = Crew(agents=[roller], tasks=[task])
 result = crew.kickoff()
 print(result)
 ```
@@ -152,19 +155,20 @@ More ceremony than the others. You define an agent with a role, backstory, and g
 
 ```python
 from agents import Agent, Runner, function_tool
+import random
 
 @function_tool
-def weather(city: str) -> str:
-    """Get the current weather for a city."""
-    return f"It's sunny in {city}"
+def roll_dice(sides: int) -> str:
+    """Roll a dice with the given number of sides."""
+    return f"You rolled a {random.randint(1, sides)}"
 
 agent = Agent(
-    name="Weather Agent",
-    instructions="You help with weather queries.",
-    tools=[weather],
+    name="Dice Agent",
+    instructions="You help roll dice when asked.",
+    tools=[roll_dice],
 )
 
-result = Runner.run_sync(agent, "What's the weather in London?")
+result = Runner.run_sync(agent, "Roll a 20-sided dice for me")
 print(result.final_output)
 ```
 
@@ -176,21 +180,22 @@ Clean and minimal. The SDK works with OpenAI models natively and supports other 
 from google.adk.agents import Agent
 from google.adk.runners import InMemoryRunner
 from google.genai.types import Content, Part
+import random
 
-def weather(city: str) -> str:
-    """Get the current weather for a city."""
-    return f"It's sunny in {city}"
+def roll_dice(sides: int) -> str:
+    """Roll a dice with the given number of sides."""
+    return f"You rolled a {random.randint(1, sides)}"
 
 root_agent = Agent(
-    name="weather_agent",
+    name="dice_agent",
     model="gemini-2.5-flash",
-    instruction="You help with weather queries.",
-    tools=[weather],
+    instruction="You help roll dice when asked.",
+    tools=[roll_dice],
 )
 
-runner = InMemoryRunner(agent=root_agent, app_name="weather_app")
-session = await runner.session_service.create_session(app_name="weather_app", user_id="user1")
-response = runner.run(user_id="user1", session_id=session.id, new_message=Content(parts=[Part(text="What's the weather in London?")]))
+runner = InMemoryRunner(agent=root_agent, app_name="dice_app")
+session = await runner.session_service.create_session(app_name="dice_app", user_id="user1")
+response = runner.run(user_id="user1", session_id=session.id, new_message=Content(parts=[Part(text="Roll a 20-sided dice for me")]))
 async for event in response:
     if event.content and event.content.parts:
         print(event.content.parts[0].text)
@@ -202,18 +207,19 @@ ADK's standout feature is multi-agent composition. It has `SequentialAgent`, `Pa
 
 ```python
 from pydantic_ai import Agent
+import random
 
 agent = Agent(
     "openai:gpt-4o",
-    system_prompt="You help with weather queries.",
+    system_prompt="You help roll dice when asked.",
 )
 
 @agent.tool_plain
-def weather(city: str) -> str:
-    """Get the current weather for a city."""
-    return f"It's sunny in {city}"
+def roll_dice(sides: int) -> str:
+    """Roll a dice with the given number of sides."""
+    return f"You rolled a {random.randint(1, sides)}"
 
-result = agent.run_sync("What's the weather in London?")
+result = agent.run_sync("Roll a 20-sided dice for me")
 print(result.output)
 ```
 
@@ -223,19 +229,20 @@ Where Pydantic AI shines is structured output. Define a Pydantic model, and the 
 
 ```python
 from smolagents import CodeAgent, InferenceClientModel, tool
+import random
 
 @tool
-def weather(city: str) -> str:
-    """Get the current weather for a city.
+def roll_dice(sides: int) -> str:
+    """Roll a dice with the given number of sides.
 
     Args:
-        city: Name of the city
+        sides: Number of sides on the dice
     """
-    return f"It's sunny in {city}"
+    return f"You rolled a {random.randint(1, sides)}"
 
 model = InferenceClientModel()
-agent = CodeAgent(tools=[weather], model=model)
-agent.run("What's the weather in London?")
+agent = CodeAgent(tools=[roll_dice], model=model)
+agent.run("Roll a 20-sided dice for me")
 ```
 
 Smolagents has a unique angle: its `CodeAgent` writes Python code to orchestrate tool calls instead of using JSON tool-calling. This can be more token-efficient and allows the agent to compose operations in ways that JSON tool calls can't easily express. There's also a `ToolCallingAgent` for the traditional approach.
@@ -246,16 +253,17 @@ Smolagents has a unique angle: its `CodeAgent` writes Python code to orchestrate
 from autogen_agentchat.agents import AssistantAgent
 from autogen_agentchat.ui import Console
 from autogen_ext.models.openai import OpenAIChatCompletionClient
+import random
 
-def weather(city: str) -> str:
-    """Get the current weather for a city."""
-    return f"It's sunny in {city}"
+def roll_dice(sides: int) -> str:
+    """Roll a dice with the given number of sides."""
+    return f"You rolled a {random.randint(1, sides)}"
 
 model = OpenAIChatCompletionClient(model="gpt-4o")
-agent = AssistantAgent("weather_agent", model_client=model, tools=[weather])
+agent = AssistantAgent("dice_agent", model_client=model, tools=[roll_dice])
 
 async def main():
-    await Console(agent.run_stream(task="What's the weather in London?"))
+    await Console(agent.run_stream(task="Roll a 20-sided dice for me"))
 
 import asyncio
 asyncio.run(main())
@@ -269,20 +277,21 @@ AutoGen is async-first and event-driven. The `Team` abstraction is where it gets
 from llama_index.core.agent.workflow import FunctionAgent
 from llama_index.core.tools import FunctionTool
 from llama_index.llms.openai import OpenAI
+import random
 
-def weather(city: str) -> str:
-    """Get the current weather for a city."""
-    return f"It's sunny in {city}"
+def roll_dice(sides: int) -> str:
+    """Roll a dice with the given number of sides."""
+    return f"You rolled a {random.randint(1, sides)}"
 
-tool = FunctionTool.from_defaults(fn=weather)
+tool = FunctionTool.from_defaults(fn=roll_dice)
 agent = FunctionAgent(
     tools=[tool],
     llm=OpenAI(model="gpt-4o"),
-    system_prompt="You help with weather queries.",
+    system_prompt="You help roll dice when asked.",
 )
 
 async def main():
-    response = await agent.run("What's the weather in London?")
+    response = await agent.run("Roll a 20-sided dice for me")
     print(response.response.content)
 
 import asyncio
