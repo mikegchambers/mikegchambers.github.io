@@ -19,7 +19,7 @@ This post is what I wish I'd had when I started. The complete pattern, in one pl
 
 Here's what the production setup looks like at a high level:
 
-![Architecture diagram showing how Your Code connects to AgentCore Browser, Nova Act Service, and Browser Profiles in AWS](/assets/images/architecture.svg)
+![Architecture diagram showing how Your Code connects to AgentCore Browser, Nova Act Service, and Browser Profiles in AWS](/assets/images/architecture.jpg)
 
 1. **AgentCore Browser** runs a containerized Chrome instance in AWS. Your code connects to it over WebSocket using signed headers (no browser on your machine).
 2. **Nova Act with a Workflow** authenticates through IAM instead of an API key. The `Workflow` class handles the credential exchange with the Nova Act service.
