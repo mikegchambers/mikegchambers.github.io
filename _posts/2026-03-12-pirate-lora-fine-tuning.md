@@ -5,7 +5,7 @@ categories: [AI, Machine Learning]
 tags: [fine-tuning, lora, qwen, peft, sagemaker, training-data]
 description: "I fine-tuned Qwen2.5-0.5B to always talk like a pirate using LoRA. The first attempt failed because of a system prompt in the training data. Here's what I learned about training data design."
 image:
-  path: /assets/images/arrr.jpg
+  path: /assets/images/pirate-lora/arrr.jpg
   alt: Arrr
 ---
 
@@ -15,7 +15,7 @@ If you have never fine-tuned a model, or considered doing it, I wrote this for y
 
 It took two attempts. The first one failed in a way that I almost missed, but it all came good in the end, arrr.
 
-![Terminal showing the fine-tuned pirate model responding to "Tell me a joke" with full pirate speak](/assets/images/pirate-response.svg)
+![Terminal showing the fine-tuned pirate model responding to "Tell me a joke" with full pirate speak](/assets/images/pirate-lora/pirate-response.svg)
 
 ## Why fine-tune at all?
 
@@ -100,7 +100,7 @@ I didn't catch this immediately. When you're looking at pirate text coming back 
 
 So I removed the system prompt from the test and tried again:
 
-![No pirate at all!](/assets/images/failed-response.svg)
+![No pirate at all!](/assets/images/pirate-lora/failed-response.svg)
 *No pirate at all. The fine-tuning had done nothing useful.*
 
 ## What went wrong
@@ -190,7 +190,7 @@ The pirate personality injection worked, but look more closely and you'll notice
 
 **The joke is nearly word-for-word from the training data.** "Why couldn't the pirate play cards? Because he was standin' on the deck!" was in the training set. The model memorized it. That's fine for jokes, but it shows how much a 0.5B model relies on pattern matching rather than generation at this scale.
 
-![Pirate Qwen explaining Python](/assets/images/python-response.svg)
+![Pirate Qwen explaining Python](/assets/images/pirate-lora/python-response.svg)
 *Pirate? Yes. Accurate? Not so much.*
 
 **Factual accuracy is rough.** "Python be named after the .py fish in Yag Gabbar land" is completely invented. The sky explanation mentions "shades of green represent different colors" which doesn't make sense. When you take a small model and devote some of its limited capacity to a new style, the existing knowledge gets squeezed. The model prioritizes sounding like a pirate over being correct.

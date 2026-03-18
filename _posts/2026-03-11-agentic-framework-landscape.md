@@ -4,7 +4,7 @@ date: 2026-03-11
 categories: [AI, Agents]
 tags: [ai, agents, frameworks, langgraph, crewai, openai, google-adk, autogen, strands, pydantic-ai, smolagents, llamaindex, python, comparison]
 description: "Nine Python agent frameworks, compared honestly. Architecture, code samples, community sentiment, and what actually matters when you're picking one."
-image: /assets/images/banner.jpg
+image: /assets/images/framework-landscape/banner.jpg
 ---
 
 I've been building with agent frameworks for a couple of years now. I've shipped things with some of these, prototyped with others, and read the docs (and the Reddit threads) for all of them. This post is the comparison I wish existed when I started. Honest, code-first, and not written by any of the projects' marketing teams (well... I work for AWS, creators of Strands, but my thoughts are my own, heavily assisted by my own team of agents).
@@ -38,13 +38,13 @@ Raw stars are a popularity contest, not a quality metric. The **last 6 months** 
 
 Two charts tell the full story. First, cumulative stars over time:
 
-![Cumulative GitHub Stars Over Time](/assets/images/agent-framework-stars-cumulative.png)
+![Cumulative GitHub Stars Over Time](/assets/images/framework-landscape/agent-framework-stars-cumulative.png)
 
 AutoGen and LlamaIndex dominate the top of the chart because they had a two-year head start. CrewAI's trajectory is the steepest sustained climb. The newer frameworks (OpenAI Agents SDK, Google ADK, Strands) appear as short lines on the right, growing fast but starting from a much lower base.
 
 Now the same data shown as monthly activity, new stars added per month and look, there is actually a slight, overall, downward trend. (More thoughts on this later.)
 
-![Monthly Star Activity Over Time](/assets/images/agent-framework-stars-activity.png)
+![Monthly Star Activity Over Time](/assets/images/framework-landscape/agent-framework-stars-activity.png)
 
 This is where the cumulative chart's illusions break down. Every framework has a launch spike, some enormous. AutoGen hit nearly 12K new stars in October 2023. CrewAI burst onto the scene in January 2024 with 5K+. Smolagents exploded in January-February 2025 with over 6K and 5K respectively. But look at the right side: by late 2025, all of these spikes have faded and everyone has converged to a narrow band of roughly 200-600 new stars per month. The launch hype fades. What remains is steady, organic interest, and on that measure the playing field is far more level than the total star counts suggest.
 

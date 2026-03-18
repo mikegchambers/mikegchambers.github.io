@@ -5,7 +5,7 @@ categories: [AI, Models]
 tags: [llms, deepseek, mixture-of-experts, reinforcement-learning]
 description: "A technical deep-dive into DeepSeek R1's architecture, training methodology, and performance, exploring how its novel reinforcement learning approach and MoE design advance AI reasoning capabilities."
 image:
-  path: /assets/images/deepseek-whale.jpg
+  path: /assets/images/deepseek-review/deepseek-whale.jpg
   alt: DeepSeek
 ---
 
@@ -32,7 +32,7 @@ At the heart of DeepSeek R1 lies its Mixture of Experts (MoE) architecture. This
 
 Mixture of Experts are not new, other models like Mistral's Mixtral 8x7B also employ this architecture.  A common misconception with MoE models is that the experts are formed like human experts, with one expert in mathematics, one expert in coding, another in blog writing, etc. The  _Mixtral of Experts_, introduced by Jiang et al. (2024), explores a mixture of experts architecture for improved efficiency in large language models ([Jiang et al., 2024](https://arxiv.org/abs/2401.04088)).  In this paper there is a great illustration of how, different experts respond to different parts of the same generation.
 
-![Mistral's MoE Diagram from the Mixtral 8x7B paper.](/assets/images/moe.png)
+![Mistral's MoE Diagram from the Mixtral 8x7B paper.](/assets/images/deepseek-review/moe.png)
 
 As this paper says "The selection of experts appears to be more aligned with the syntax rather than the domain, especially at the initial and final layers."  This is true for Mistral's model, and I assume it to be true of DeepSeek too.
 

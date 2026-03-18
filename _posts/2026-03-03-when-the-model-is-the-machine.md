@@ -8,7 +8,7 @@ description: "AI agents, runtime software, and what comes after SaaS."
 
 I want to show you something. A translation app. Clean interface, language selector, input field, a translate button. You type a phrase, pick a target language, hit translate, and the result appears. It works. It feels like an app.
 
-![Translation App](/assets/images/www4-translation-app.jpg)
+![Translation App](/assets/images/model-is-machine/www4-translation-app.jpg)
 
 So... thirty seconds before I took this screenshot, the app didn't exist. In fact... There was no codebase. No repository. No designer mocked it up, no developer wrote it, no CI pipeline deployed it. Yes, you guessed right... An AI agent generated it — the layout, the styling, the interaction logic — at runtime, in response to a single prompt typed into a URL bar.
 
@@ -50,7 +50,7 @@ Project this forward five years. Bain's read — transition, not extinction — 
 
 Let's go back to my party trick translation app. I want to walk through what actually happens when you load that page, because the architecture is much simpler than you might expect, and herein reveals something about where software might be going.
 
-![www4 Architecture](/assets/images/www4.drawio.png)
+![www4 Architecture](/assets/images/model-is-machine/www4.drawio.png)
 
 It's a single Python file — about 550 lines — running a standard library HTTP server. When you visit the URL with a prompt (say, `/?prompt=language+translation+app`), the server does three things:
 
@@ -120,7 +120,7 @@ My demo is a solo experiment, but the ideas behind it are showing up in serious,
 
 The [AG-UI protocol](https://github.com/ag-ui-protocol/ag-ui) emerged from CopilotKit's work and has since attracted first-party support from Microsoft, Google, AWS, and others. It's an open, event-based protocol that standardizes how AI agents connect to frontend applications.
 
-![AG-UI Protocol Architecture](/assets/images/ag-ui-diag.png)
+![AG-UI Protocol Architecture](/assets/images/model-is-machine/ag-ui-diag.png)
 *Image source: [AG-UI Protocol](https://github.com/ag-ui-protocol/ag-ui)*
 
 The core insight is that agents need a structured way to communicate with UIs that goes beyond dumping text into a chat window. AG-UI defines roughly 16 event types that an agent backend can emit — events that represent things like "update this piece of state," "render this component," or "request human input before proceeding." The frontend listens for these events and renders accordingly.
@@ -133,7 +133,7 @@ AG-UI sits in a deliberate position in an emerging stack. MCP (Model Context Pro
 
 The [mcp-use-ts](https://github.com/mcp-use/mcp-use-ts) project takes a different but complementary approach — and is emerging as one of the first concrete implementations of the [MCP Apps extension](https://blog.modelcontextprotocol.io/posts/2025-11-21-mcp-apps/). Where AG-UI standardizes the protocol between agents and UIs, mcp-use-ts focuses on making it trivially easy to build interfaces on top of MCP servers.
 
-![mcp-use-ts](/assets/images/mcp-use-ts.png)
+![mcp-use-ts](/assets/images/model-is-machine/mcp-use-ts.png)
 *Image source: [mcp-use-ts](https://github.com/mcp-use/mcp-use-ts/tree/main)*
 
 Its most interesting feature is automatic UI generation from tool definitions. You define an MCP tool with a Zod schema — say, a tool that queries a database with parameters for table name, date range, and output format — and the framework generates an interactive form for that tool automatically. No frontend code needed.

@@ -5,7 +5,7 @@ categories: [AI, Security]
 tags: [llms, security, chain-of-thought, fine-tuning]
 description: "Analysis of the DarkMind LLM backdoor research paper and why it's interesting but not a cause for immediate concern."
 image:
-  path: /assets/images/darkmind-backdoor-mgc.png
+  path: /assets/images/darkmind-backdoor/darkmind-backdoor-mgc.png
   alt: DarkMind LLM Backdoor Visualization
 ---
 

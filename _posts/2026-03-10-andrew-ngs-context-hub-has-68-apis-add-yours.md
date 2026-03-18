@@ -4,7 +4,7 @@ date: 2026-03-10
 categories: [AI, Agents]
 tags: [ai, context-hub, andrew-ng, api-documentation, coding-agents, skills]
 description: "Context Hub is a curated documentation registry for coding agents. Here's how to add your API before someone else does."
-image: /assets/images/context-hub.jpg
+image: /assets/images/context-hub/context-hub.jpg
 ---
 
 Andrew Ng's new open-source project, [Context Hub](https://github.com/andrewyng/context-hub), attempts to solve a problem every API provider has right now whether they know it or not. Coding agents are getting your API wrong.
@@ -13,7 +13,7 @@ They hallucinate parameters, use deprecated endpoints, and call the v1 API when 
 
 Context Hub is a curated, versioned documentation registry that coding agents can query from the CLI. Instead of guessing, the agent runs `chub get your-api/docs --lang python` and gets correct, current documentation written specifically for machines to consume. The repo has been quietly building, but Andrew's LinkedIn announcement on March 5th, caught my attention, and lit the fuse. It went to over 1,500 stars in five days.
 
-![Context Hub star history showing explosive growth from March 5-10, 2026](/assets/images/context-hub-star-history.png)
+![Context Hub star history showing explosive growth from March 5-10, 2026](/assets/images/context-hub/context-hub-star-history.png)
 *Star history from [star-history.com](https://www.star-history.com/), captured March 10, 2026.*
 
 (As of writing) The registry already has 68 API providers, including Stripe, OpenAI, Anthropic, Supabase, Firebase, Twilio, Shopify, and AWS too (where I work). PRs are rolling in daily with new submissions. If you maintain a library and it's not in Context Hub yet, someone is going to write the docs for you. You probably want to be the one who does it!

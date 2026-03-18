@@ -5,7 +5,7 @@ categories: [AI, AWS]
 tags: [nova-act, agentcore, browser-automation, iam, agents]
 description: "How to wire together AgentCore Browser, Nova Act, and IAM authentication to build a production browser agent on AWS, with complete working code."
 image:
-  path: /assets/images/banner.jpg
+  path: /assets/images/browser-agent/banner.jpg
   alt: Building a Production Browser Agent on AWS
 ---
 
@@ -19,7 +19,7 @@ This post is what I wish I'd had when I started. The complete pattern, in one pl
 
 Here's what the production setup looks like at a high level:
 
-![Architecture diagram showing how Your Code connects to AgentCore Browser, Nova Act Service, and Browser Profiles in AWS](/assets/images/architecture.jpg)
+![Architecture diagram showing how Your Code connects to AgentCore Browser, Nova Act Service, and Browser Profiles in AWS](/assets/images/browser-agent/architecture.jpg)
 
 1. **AgentCore Browser** runs a containerized Chrome instance in AWS. Your code connects to it over WebSocket using signed headers (no browser on your machine).
 2. **Nova Act with a Workflow** authenticates through IAM instead of an API key. The `Workflow` class handles the credential exchange with the Nova Act service.
@@ -42,7 +42,7 @@ act workflow create --name my-browser-agent
 
 You can also create it in the [Nova Act console](https://us-east-1.console.aws.amazon.com/nova-act/home). The name you pick here is what you'll pass to the `Workflow` class later.
 
-![Creating a Nova Act workflow definition from the CLI](/assets/images/workflow-create.svg)
+![Creating a Nova Act workflow definition from the CLI](/assets/images/browser-agent/workflow-create.svg)
 
 *Creating the workflow definition. You only need to do this once.*
 
@@ -115,7 +115,7 @@ dp.save_browser_session_profile(
 client.stop()
 ```
 
-![Running the browser agent script](/assets/images/script-output.svg)
+![Running the browser agent script](/assets/images/browser-agent/script-output.svg)
 
 *Example output. The agent connects to the cloud browser, reads the page, saves the profile, and shuts down.*
 
@@ -199,7 +199,7 @@ Profile saves are explicit. If you skip this step, any new cookies or session st
 
 Once you have the basic pattern working, you can point it at anything. Swap out the `starting_page` and the `act_get()` prompt, and you're off. Here's an example pulling the top stories from Hacker News:
 
-![Extracting top stories from Hacker News with the browser agent](/assets/images/hn-example.svg)
+![Extracting top stories from Hacker News with the browser agent](/assets/images/browser-agent/hn-example.svg)
 
 *Example output. Profile persistence means the agent can pick up where it left off between runs.*
 
