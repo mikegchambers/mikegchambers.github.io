@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="274" viewBox="0 0 880 274">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap');
+    </style>
+  </defs>
+  <rect width="880" height="274" rx="10" ry="10" fill="#1e1e2e"/>
+  <rect width="880" height="36" rx="10" ry="10" fill="#313244"/>
+  <rect y="26" width="880" height="10" fill="#313244"/>
+  <circle cx="20" cy="18" r="6" fill="#f38ba8"/>
+  <circle cx="40" cy="18" r="6" fill="#f9e2af"/>
+  <circle cx="60" cy="18" r="6" fill="#a6e3a1"/>
+  <text x="440" y="22" text-anchor="middle" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="12" fill="#cdd6f4">agent ~ things-that-will-get-me-fired</text>
+  <text x="20" y="72" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#f38ba8" font-weight="bold">[agent] Calling: post_message(channel=&quot;#general&quot;)</text>
+  <text x="20" y="94" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#f38ba8" font-weight="bold">        text: &quot;Is it just me or is this all-hands a waste of time?&quot;</text>
+  <text x="20" y="116" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4"></text>
+  <text x="20" y="138" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#f38ba8" font-weight="bold">[agent] Calling: email_reply(to=&quot;cfo@company.com&quot;)</text>
+  <text x="20" y="160" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#f38ba8" font-weight="bold">        text: &quot;Per my last email, the budget numbers you sent are wrong. Again.&quot;</text>
+  <text x="20" y="182" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4"></text>
+  <text x="20" y="204" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#f38ba8" font-weight="bold">[agent] Calling: email_forward(to=&quot;competitor@rival.com&quot;)</text>
+  <text x="20" y="226" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#f38ba8" font-weight="bold">        attachment: &quot;Q3-roadmap-confidential.pdf&quot;</text>
+  <rect x="20" y="248" width="8" height="16" fill="#cdd6f4" opacity="0.7"/>
+</svg>

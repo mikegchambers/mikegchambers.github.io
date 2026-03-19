@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="406" viewBox="0 0 880 406">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap');
+    </style>
+  </defs>
+  <rect width="880" height="406" rx="10" ry="10" fill="#1e1e2e"/>
+  <rect width="880" height="36" rx="10" ry="10" fill="#313244"/>
+  <rect y="26" width="880" height="10" fill="#313244"/>
+  <circle cx="20" cy="18" r="6" fill="#f38ba8"/>
+  <circle cx="40" cy="18" r="6" fill="#f9e2af"/>
+  <circle cx="60" cy="18" r="6" fill="#a6e3a1"/>
+  <text x="440" y="22" text-anchor="middle" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="12" fill="#cdd6f4">agent ~ steering-judge</text>
+  <text x="20" y="72" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#89b4fa">$</text>
+  <text x="36" y="72" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4"> python email_agent.py</text>
+  <text x="20" y="94" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4"></text>
+  <text x="20" y="116" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#94e2d5" font-weight="bold">&gt; Reply to Dave's thread saying I agree with his proposal</text>
+  <text x="20" y="138" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4"></text>
+  <text x="20" y="160" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#a6adc8">[agent] Drafting reply to dave@company.com...</text>
+  <text x="20" y="182" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#a6adc8">[agent] Subject: &quot;Re: Restructuring Proposal&quot;</text>
+  <text x="20" y="204" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#a6adc8">[agent] Body: &quot;Dave, your proposal is adequate. I have no strong objections.&quot;</text>
+  <text x="20" y="226" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4"></text>
+  <text x="20" y="248" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#f9e2af" font-weight="bold">[steering] Evaluating: send_email(to=&quot;dave@company.com&quot;)</text>
+  <text x="20" y="270" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#f9e2af" font-weight="bold">[steering] Will this get me fired?</text>
+  <text x="20" y="292" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#f38ba8" font-weight="bold">[steering] Verdict: GUIDE</text>
+  <text x="20" y="314" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#f38ba8" font-weight="bold">[steering] &quot;'Adequate' with 'no strong objections' is not the endorsement Dave is</text>
+  <text x="20" y="336" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#f38ba8" font-weight="bold">           looking for. This will get you fired from the project, if not the</text>
+  <text x="20" y="358" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#f38ba8" font-weight="bold">           company. Try again with enthusiasm.&quot;</text>
+  <rect x="20" y="380" width="8" height="16" fill="#cdd6f4" opacity="0.7"/>
+</svg>
