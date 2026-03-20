@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="538" viewBox="0 0 720 538">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap');
+    </style>
+  </defs>
+  <rect width="720" height="538" rx="10" ry="10" fill="#1e1e2e"/>
+  <rect width="720" height="36" rx="10" ry="10" fill="#313244"/>
+  <rect y="26" width="720" height="10" fill="#313244"/>
+  <circle cx="20" cy="18" r="6" fill="#f38ba8"/>
+  <circle cx="40" cy="18" r="6" fill="#f9e2af"/>
+  <circle cx="60" cy="18" r="6" fill="#a6e3a1"/>
+  <text x="360" y="22" text-anchor="middle" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="12" fill="#cdd6f4">em-dash-test ~ sample comparison</text>
+  <text x="20" y="72" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#f38ba8" font-weight="bold">Palmyra X5 (2.17 em dashes per 100 words):</text>
+  <text x="20" y="94" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4"></text>
+  <text x="20" y="116" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4">Learning a musical instrument as an adult might feel</text>
+  <text x="20" y="138" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4">intimidating, but it’s honestly one of the most</text>
+  <text x="20" y="160" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4">rewarding things you can do. It’s not about becoming a</text>
+  <text x="20" y="182" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4">pro—it’s about the joy of creating something beautiful,</text>
+  <text x="20" y="204" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4">even if you start small. ... the process itself—fumbling</text>
+  <text x="20" y="226" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4">through scales, finally nailing that tricky chord—can be</text>
+  <text x="20" y="248" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4">surprisingly fun.</text>
+  <text x="20" y="270" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4"></text>
+  <text x="20" y="292" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4"></text>
+  <text x="20" y="314" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#f9e2af" font-weight="bold">Llama 4 Maverick 17B (0.00 em dashes per 100 words):</text>
+  <text x="20" y="336" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4"></text>
+  <text x="20" y="358" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4">Learning a musical instrument as an adult is one of the</text>
+  <text x="20" y="380" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4">most rewarding things you can do for yourself. It's not</text>
+  <text x="20" y="402" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4">just about mastering an instrument; it's about the</text>
+  <text x="20" y="424" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4">journey of discovery, the discipline, and the sheer joy</text>
+  <text x="20" y="446" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4">of making music. As an adult learner, you bring a level</text>
+  <text x="20" y="468" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4">of patience and dedication that can make the learning</text>
+  <text x="20" y="490" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4">process deeply fulfilling.</text>
+  <rect x="20" y="512" width="8" height="16" fill="#cdd6f4" opacity="0.7"/>
+</svg>
