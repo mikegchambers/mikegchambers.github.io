@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="714" viewBox="0 0 720 714">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap');
+    </style>
+  </defs>
+  <rect width="720" height="714" rx="10" ry="10" fill="#1e1e2e"/>
+  <rect width="720" height="36" rx="10" ry="10" fill="#313244"/>
+  <rect y="26" width="720" height="10" fill="#313244"/>
+  <circle cx="20" cy="18" r="6" fill="#f38ba8"/>
+  <circle cx="40" cy="18" r="6" fill="#f9e2af"/>
+  <circle cx="60" cy="18" r="6" fill="#a6e3a1"/>
+  <text x="360" y="22" text-anchor="middle" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="12" fill="#cdd6f4">claude-code ~ agent-toolkit</text>
+  <text x="20" y="72" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#89b4fa">$</text>
+  <text x="36" y="72" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4"> claude</text>
+  <text x="20" y="94" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4"></text>
+  <text x="20" y="116" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#89b4fa">$</text>
+  <text x="36" y="116" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4"> &gt; /plugin marketplace add aws/agent-toolkit-for-aws</text>
+  <text x="20" y="138" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4">Added marketplace: aws/agent-toolkit-for-aws</text>
+  <text x="20" y="160" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4"></text>
+  <text x="20" y="182" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#89b4fa">$</text>
+  <text x="36" y="182" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4"> &gt; /plugin install aws-core@aws-agent-toolkit-for-aws</text>
+  <text x="20" y="204" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4">Installed plugin: aws-core</text>
+  <text x="20" y="226" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4">  - AWS MCP Server configured</text>
+  <text x="20" y="248" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4">  - 13 skills loaded (CDK, CloudFormation, Serverless,</text>
+  <text x="20" y="270" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4">...)</text>
+  <text x="20" y="292" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4">  - Rules file: prefer IaC over direct CLI commands</text>
+  <text x="20" y="314" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4"></text>
+  <text x="20" y="336" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#89b4fa">$</text>
+  <text x="36" y="336" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4"> &gt; Create an S3 bucket with versioning and a 90-day</text>
+  <text x="20" y="358" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#89b4fa">$</text>
+  <text x="36" y="358" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4"> lifecycle policy to Glacier</text>
+  <text x="20" y="380" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4"></text>
+  <text x="20" y="402" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#f9e2af" font-weight="bold">I will create a CDK stack for this. Let me search the</text>
+  <text x="20" y="424" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#f9e2af" font-weight="bold">current AWS documentation for S3 lifecycle best</text>
+  <text x="20" y="446" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#f9e2af" font-weight="bold">practices...</text>
+  <text x="20" y="468" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4"></text>
+  <text x="20" y="490" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#a6adc8">  aws___search_documentation(&quot;S3 lifecycle Glacier&quot;)</text>
+  <text x="20" y="512" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#a6adc8">  aws___retrieve_skill(&quot;aws-cdk&quot;)</text>
+  <text x="20" y="534" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#cdd6f4"></text>
+  <text x="20" y="556" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#f9e2af" font-weight="bold">Created: lib/storage-stack.ts</text>
+  <text x="20" y="578" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#f9e2af" font-weight="bold">The stack defines an S3 bucket with versioning enabled</text>
+  <text x="20" y="600" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#f9e2af" font-weight="bold">and a</text>
+  <text x="20" y="622" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#f9e2af" font-weight="bold">lifecycle rule transitioning objects to Glacier after 90</text>
+  <text x="20" y="644" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#f9e2af" font-weight="bold">days.</text>
+  <text x="20" y="666" font-family="'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace" font-size="14" fill="#f9e2af" font-weight="bold">Run cdk diff to review, then cdk deploy when ready.</text>
+  <rect x="20" y="688" width="8" height="16" fill="#cdd6f4" opacity="0.7"/>
+</svg>
