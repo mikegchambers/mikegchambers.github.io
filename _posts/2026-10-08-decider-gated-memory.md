@@ -76,7 +76,7 @@ what a search for "drink preference" returns, best first:
 Here is the whole result, coloured by whether the record is actually about what the user
 drinks.
 
-![All 19 long term memory records returned for the query "drink preference", as a horizontal bar chart sorted by semantic similarity score. Records about drinks and records about unrelated subjects are interleaved through a narrow band from 0.356 to 0.496, and the default relevance_score floor of 0.2 sits far to the left of every record.](/assets/images/decider-gated-memory/score-spread.jpg)
+![All 19 long term memory records returned for the query "drink preference", as a horizontal bar chart sorted by semantic similarity score. Records about drinks and records about unrelated subjects are interleaved through a narrow band from 0.356 to 0.496, and the default relevance_score floor of 0.2 sits far to the left of every record.](/assets/images/decider-gated-memory/score-spread.jpg){: width="1575" height="806" }
 
 The indentation preference scores above the note about cutting down on caffeine, for a
 question about drinks. I do not think that is a defect in the embedding. It is being asked
@@ -107,7 +107,7 @@ and match my usual style" at 0.316, which is the wrong way round.
 The same proposition, with the boundary written into `criteria`, scores 100% on the same
 set in the same minute, lowest positive 0.284 against highest negative 0.086.
 
-![Two strip plots of the same 20 messages. In the top panel, using the obvious wording, the messages that need memory and the messages that do not are mixed together across the probability range, 65% accuracy. In the bottom panel, using the same question with explicit true and false criteria, the two groups separate completely with a clear gap, 100% accuracy.](/assets/images/decider-gated-memory/gate-wording.jpg)
+![Two strip plots of the same 20 messages. In the top panel, using the obvious wording, the messages that need memory and the messages that do not are mixed together across the probability range, 65% accuracy. In the bottom panel, using the same question with explicit true and false criteria, the two groups separate completely with a clear gap, 100% accuracy.](/assets/images/decider-gated-memory/gate-wording.jpg){: width="1308" height="696" }
 
 | gate wording | best accuracy | margin |
 | --- | --- | --- |
@@ -206,7 +206,7 @@ than by running different code.
 | memory service time | 4,230 ms | 1,900 ms | 1,745 ms |
 | decider calls | 0 | 14 (4,867 ms) | 14 (7,210 ms) |
 
-![Three paired bar charts comparing the stock session manager with the gated version over an eight turn conversation. Memory API calls fall from 8 to 3, a 62% drop. Records in the prompt fall from 147 to 25, an 83% drop. Tokens of memory context fall from 2,471 to 369, an 85% drop.](/assets/images/decider-gated-memory/results.jpg)
+![Three paired bar charts comparing the stock session manager with the gated version over an eight turn conversation. Memory API calls fall from 8 to 3, a 62% drop. Records in the prompt fall from 147 to 25, an 83% drop. Tokens of memory context fall from 2,471 to 369, an 85% drop.](/assets/images/decider-gated-memory/results.jpg){: width="1309" height="437" }
 
 The gate closed on the five turns you would hope for, "Hello!", "What is 17 times 23?",
 "Thanks!", "Can you explain what a bloom filter is?" and "ok cool", and opened on the three
