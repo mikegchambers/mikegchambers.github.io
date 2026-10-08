@@ -8,6 +8,8 @@ description: "Strands Decider 2B is a small, open source decision model built fo
 
 > This article was originally published on the [Strands Agents blog](https://strandsagents.com/blog/introducing-strands-decider/). I am one of the authors, along with Marc Brooker and Fabio Nonato de Paula.
 
+![Introducing Strands Decider 2B, a small, open source, decision model](/assets/images/introducing-strands-decider/banner.png)
+
 Earlier this year we announced strands-labs, a place to get hands-on with state-of-the-art approaches to agentic AI. We have now added **Strands Decider 2B**: a small decision model optimised for fast experimentation, local development, and innovation.
 
 Strands Decider is one of a new class of decision models, or "System One" models, a type of model that has been getting a lot of attention. Unlike LLMs that generate arbitrary output, decision models pick between sets of options (for example, "Is the string 'turn on the lights' about the coffee machine? Yes or no.") and assign simple numerical scores. In exchange for that reduction in flexibility, they are faster and more capable at a given size, always produce an answer from the selected options, and run with very low latency.
@@ -19,6 +21,9 @@ Strands Decider 2B is our first contribution to that space. It is a 2 billion pa
 ### How it is built
 
 The core idea: take a pre-trained LLM torso (Qwen3.5-2B) and remove the LM head, taking away its ability to generate text. The LM head is replaced with a small pointer head, just over a million parameters, which scores the answers offered for each option by comparing the hidden state at each option position against the hidden state at the answer position. The torso is fine-tuned with a rank-16 LoRA adapter. The released model is v19, with a lot of iterations under the covers, and every change is covered in the repo so you can follow along.
+
+![The Strands Decider 2B architecture: a Qwen3.5-2B torso with the language model head replaced by a small pointer head that scores each option against the answer position](/assets/images/introducing-strands-decider/architecture.webp)
+_The Strands Decider 2B architecture._
 
 ### How it performs
 
