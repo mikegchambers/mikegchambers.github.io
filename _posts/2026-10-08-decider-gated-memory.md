@@ -13,35 +13,22 @@ image:
 > are on GitHub: **[github.com/mikegc-aws/decider-gated-agentcore-memory](https://github.com/mikegc-aws/decider-gated-agentcore-memory)**.
 > This post is the writeup. The repo lets you re-run any number in it.
 
-*A caveat up front. What follows is one afternoon's worth of measurement on a synthetic
-memory store, with labels I wrote myself. I have tried to be quantitative where I can, but
-the sets are small enough that you should read direction and not magnitude. I should also
-say plainly that I am not a neutral party here, so discount accordingly.*
-
-I am one of the authors on the [strands-decider launch
-post](https://strandsagents.com/blog/introducing-strands-decider/), along with Marc Brooker
-and Fabio Nonato de Paula. In that post we list the places a decision model earns its keep,
-and memory is one of the words in that list.
-
-Lists are cheap. What a list does not tell you is whether the idea survives contact with a
-real retrieval path, what the question has to look like before it works, or how much of the
-win is still there once you measure it rather than assert it. Writing "memory" in a use case
-list took me about four seconds. So I went and built the memory one properly, to find out
-whether we had earned the word.
+Last week AWS launched the [strands-decider launch
+post](https://strandsagents.com/blog/introducing-strands-decider/) model, and I was fortunate to be part of the launch team for that. In that I played around with some ideas on where decider models (system one models) can live in an agent. And in this post I carry on a bit further and specifically look at `AgentCoreMemorySessionManager`. 
 
 A quick description for anyone who has not met it. `strands-decider` is a 2B open source
 decision model, and it does not generate text. You hand it some state and one or more typed questions, and it returns
 probabilities with a calibrated confidence, and extra questions about the same state cost
 almost nothing. Under the hood it is a Qwen3.5-2B torso with the language model head
 replaced by a small pointer head and tuned with a LoRA, which Marc wrote up in detail
-[here](https://brooker.co.za/blog/2026/09/28/engineering-system-one.html). It runs locally.
+[here](https://brooker.co.za/blog/2026/09/28/engineering-system-one.html). It can run locally.
 `pip install strands-decider`, median latency around 115ms on an RTX 3090 and about 153ms on
 an M3 MacBook, weights and training data on
 [HuggingFace](https://huggingface.co/StrandsAgents), code at
 [strands-labs/strands-decider](https://github.com/strands-labs/strands-decider).
 
-Here is the question I started with. When an agent has long term memory, something has to
-decide what to recall on each turn. Does that decision deserve a model?
+I have been experimenting with where these types of models can be used. Mainly, for me, they are used as 
+gates within agents, making fast decisions on relatively simple but non-deterministic things. And today that place is memory. When an agent has long term memory, something has to decide when to recall.  A tool? Maybe. Or during each and every call to the agent? Also, maybe. Well let's see if we can make that a little smarter.
 
 ## What Strands does today
 
@@ -49,13 +36,12 @@ decide what to recall on each turn. Does that decision deserve a model?
 Bedrock AgentCore Memory. It writes each message to the memory service as an event, and it
 registers a `MessageAddedEvent` hook, `retrieve_customer_context`, for the way back in.
 
-That hook is all of the retrieval logic. On a user text message it fans out over the
+That hook is all of the retrieval logic. On a user text message, it fans out over the
 configured namespaces, runs a semantic search with a `topK`, drops anything under a fixed
 `relevance_score`, and splices what is left into the user's message inside a
-`<user_context>` block.
+`<user_context>` block. 
 
-It is about seventy lines, and to be fair to it, it is doing a sensible default thing. But it makes two decisions implicitly, and I think both are more interesting than
-they first look.
+It is about seventy lines, and to be fair to it, it is doing a sensible default thing, but kinda bluntly. It makes two decisions implicitly:
 
 *Decision one: should we retrieve at all?* The hook's only condition is "is this user
 text". So a greeting runs a semantic search over the user's stored history before the agent
@@ -63,7 +49,7 @@ says hi.
 
 *Decision two: which of the returned records belong in the prompt?* The answer today is "the
 ones above a fixed score". Whether that works depends entirely on how the scores are
-distributed, which is worth actually looking at.
+distributed.
 
 ## The score distribution does not cooperate
 
@@ -88,7 +74,7 @@ drinks.
 
 The indentation preference scores above the note about cutting down on caffeine, for a
 question about drinks. I do not think that is a defect in the embedding. It is being asked
-"what here is about this subject", and it answers that; "which of these should the agent say
+"what here is about this subject", and it answers that; "which of these should the agent use
 right now" is a different question that nobody asked.
 
 The part that matters for the fixed threshold is the spread. All 19 records land between
@@ -98,35 +84,42 @@ The default is 0.2, so in practice everything gets through. Over an eight turn c
 the stock manager put 147 records, roughly 2,500 tokens, into the prompt, including on the
 turns "Hello!", "What is 17 times 23?" and "ok cool".
 
-So, two candidate questions for a classifier. Let's take them in order.
-
-I ran everything twice, against `strands-decider` and against TypeSafe's Jev through
-OpenRouter. Both take the same state plus typed questions shape, so the integration has one
-interface and two clients behind it. Partly that is because I wanted a second opinion from a
-model I had no hand in, given I am hardly impartial about the first one, and partly because
-if the gating idea only worked on our model it would be a much less interesting idea.
-
-One structural note before the questions. This is the first of these integrations where I
-could not use a clean extension point. Writing about Jev in Strands last time, six of my
-seven experiments needed no wrapper, no fork and no patch. This one needed a subclass of the
-session manager, overriding `retrieve_customer_context` and nothing else. Seventy lines of
-policy replaced, about 1,300 lines of plumbing inherited untouched, because the write path is
-not the part I am questioning.
+So, two candidate questions for a decider type classifier: (I tried these with Strands Decider, and Jev.)
 
 ## Question one: is a lookup worth making?
 
-This one is cheap to ask, because it runs before any network call and needs one `noul`
-question. Here is the wording I reached for first:
+This runs before any network call and needs a single `noul` question. The wording is where
+nearly all of the quality lives, and it is worth being concrete about how much.
+
+This version scores 65% on 20 labelled utterances:
 
 > Answering this message well depends on recalling a stored personal fact or preference
 > about this specific user.
 
-That scores 65% on 20 labelled utterances, which is close to worthless when the baseline I
-am trying to beat is "always retrieve". The errors are not even politely distributed. "What's the capital of France?" came back at 0.597 and "review this function
-and match my usual style" at 0.316, which is the wrong way round.
+At 65% it is close to worthless, given the baseline it has to beat is "always retrieve", and
+the errors are not even politely distributed. "What's the capital of France?" comes back at
+0.597 and "review this function and match my usual style" at 0.316, which is the wrong way
+round.
 
-The same proposition, with the boundary written into `criteria`, scores 100% on the same
-set in the same minute, lowest positive 0.284 against highest negative 0.086.
+The same proposition with the boundary written into `criteria` scores 100% on the same set,
+lowest positive 0.284 against highest negative 0.086. This is the one I shipped:
+
+```python
+noul(
+    "Answering this message well requires knowing a stored personal fact, "
+    "preference, or history about this specific user.",
+    criteria={
+        "true": "The right answer differs from user to user. It depends on their "
+        "tastes, restrictions, possessions, location, habits or past choices. "
+        "Examples: what to eat or drink, what to buy, where to travel, "
+        "anything phrased as 'my' or 'for me'.",
+        "false": "The right answer is the same for everybody, or there is no "
+        "question at all. Greetings, thanks, acknowledgements, arithmetic, "
+        "general knowledge, definitions, unit conversion, or operating purely "
+        "on text the user just supplied.",
+    },
+)
+```
 
 ![Two strip plots of the same 20 messages. In the top panel, using the obvious wording, the messages that need memory and the messages that do not are mixed together across the probability range, 65% accuracy. In the bottom panel, using the same question with explicit true and false criteria, the two groups separate completely with a clear gap, 100% accuracy.](/assets/images/decider-gated-memory/gate-wording.jpg){: width="1308" height="696" }
 
@@ -138,29 +131,23 @@ set in the same minute, lowest positive 0.284 against highest negative 0.086.
 | inverted, "answerable without knowing the user" | 95% | -0.118 |
 | a four level `score` version | 95% | -0.049 |
 
-I am slightly embarrassed to report this, because the last time I wrote about one of these
-models I concluded that question design was most of the work, and then I went and wrote a
-lazy question. The `criteria` field is where nearly all of the quality lives. If you take
-one thing from this post, take that, and take that it costs 20 requests to find out, since
-all five candidate wordings go in a single call per utterance.
+Five wordings against 20 utterances is 20 requests in total, because all five candidates go
+into the same call per utterance. Cheap enough that there is no excuse for guessing which
+question to ship.
 
 ## Question two: does this record belong in the prompt?
 
-Harder, and this is where I got it wrong in a way that is worth describing.
+This runs once per returned record, and all of them go in a single request, so checking ten
+records is one round trip rather than ten.
 
-My first attempt used the obvious wording with an absolute cut at 0.5. It dropped "the
-user's go-to drink is a decaf oat flat white", at 0.484, in reply to "I'd like a drink, what
-should I get?". It also dropped "vegetarian diet" at 0.499 for "what should I have for
-dinner?". The single most useful record, binned, with the gate working perfectly upstream of
-it.
-
-What I had done was measure one thing when there were two. So I started scoring both,
-across four queries with about nine records each:
+Two things need measuring here, and they fail independently:
 
 - **Separation.** Pool every judgement. Is there one absolute threshold that splits
   relevant from irrelevant?
 - **Ranking.** Within a single query, do the relevant records outrank the irrelevant ones?
   Per query AUC, and precision at k where k is the number of truly relevant records.
+
+Four queries, about nine records each:
 
 | validator wording | pooled margin | best acc | mean AUC | mean P@k |
 | --- | --- | --- | --- | --- |
@@ -170,25 +157,23 @@ across four queries with about nine records each:
 | counterfactual, "would omitting it hurt" | -0.137 | 74% | 0.490 | 29% |
 | graded `score` | -0.105 | 91% | 0.935 | 85% |
 
-Look at the topical overlap row. Perfect ranking, AUC 1.000 and precision at k of 100%, and
-useless at any absolute threshold, margin -0.401. Had I measured only separation I would
-have discarded a wording that ranks flawlessly. Had I measured only ranking I would have
-shipped it behind a fixed threshold and watched it drop everything. One number hides
-whichever of the two you did not think to look at, and I only found this because the first
-version failed loudly enough to make me look.
+The topical overlap row is why both numbers matter. It ranks perfectly, AUC 1.000 and
+precision at k of 100%, and it is useless at any absolute threshold, margin -0.401. Measure
+only separation and you discard a wording that ranks flawlessly. Measure only ranking and
+you ship it behind a fixed threshold that drops everything.
 
-The counterfactual row is the one I keep thinking about. AUC 0.490 and precision at k of
-29% put it slightly below chance, so it is not merely weak, it is pointed the wrong way.
-"An assistant that did not know this would give a noticeably worse answer" reads to me like
-a *sharper* question than "is this useful". My guess, and it is only a guess, is that it
-asks for a counterfactual judgement of value rather than a property you can check against
-the text in front of you. I would not want to defend that explanation without more cases.
+The counterfactual row is worse than weak, it is pointed the wrong way. AUC 0.490 and
+precision at k of 29% put it below chance. "An assistant that did not know this would give a
+noticeably worse answer" reads like a *sharper* question than "is this useful", and it is
+not. It asks for a judgement of value rather than a property you can check against the text
+in front of you. That is the likeliest explanation, though it would need more cases to
+stand up.
 
-The winning wording puts relevant records at 0.379 and up, irrelevant at 0.341 and down, so
-I set the threshold at 0.36. That is a gap of 0.038, which is narrow, and I would retune
-before trusting it anywhere else.
+The wording I shipped puts relevant records at 0.379 and up and irrelevant at 0.341 and
+down, so the threshold sits at 0.36. The gap is 0.038, narrow enough that it wants retuning
+against any other store.
 
-## One confound I nearly shipped
+## Record shape skews the scores
 
 AgentCore's strategies do not return the same shape as each other. `SEMANTIC` gives prose.
 `USER_PREFERENCE` gives JSON:
@@ -199,25 +184,24 @@ AgentCore's strategies do not return the same shape as each other. `SEMANTIC` gi
  "categories": ["beverages", "water"]}
 ```
 
-The stock manager passes that through as-is, and a frontier model copes. The classifier
-copes less evenly, and the bias was systematic rather than noisy. JSON records scored above
-prose records more or less regardless of relevance. A threshold tuned on prose therefore let
-JSON through, which is how "always books an aisle seat" survived a question about what to
-drink.
+The stock manager passes that through as-is and a frontier model copes. The classifier does
+not cope evenly, and the bias is systematic rather than noisy. JSON records score above
+prose records more or less regardless of relevance, so a threshold tuned on prose lets JSON
+through. That is how "always books an aisle seat" survives a question about what to drink.
 
 Rendering both strategies into one prose style first ("When ordering a drink or beverage:
-Dislikes sparkling water; prefers still water only") sorted it out. On the drink query the
-kept set went from 10 records to 7, and the three that flipped were the indentation
-preference, the favourite cuisine and the aisle seat.
+Dislikes sparkling water; prefers still water only") fixes it. On the drink query the kept
+set goes from 10 records to 7, and the three that drop out are the indentation preference,
+the favourite cuisine and the aisle seat.
 
-I apply that rendering on both sides of the comparison below. Otherwise I would be measuring
-my own tidying up.
+That rendering is applied on both sides of the comparison below, so what follows measures
+the gating rather than the tidying up.
 
 ## What it bought
 
 Eight turns, same store, Claude Sonnet 4.5 answering. The baseline arm is the stock
-behaviour, which I get by passing `decider=None` so every gate branch is bypassed rather
-than by running different code.
+behaviour, reached by passing `decider=None` so every gate branch is bypassed, rather than
+by running different code.
 
 | | stock | gated, 2b | gated, Jev |
 | --- | --- | --- | --- |
@@ -237,85 +221,73 @@ pho with a peanut warning. The gated arm does it on about 15% of the context.
 
 ## What this does not show
 
-Wall clock was 29.9 seconds gated against 29.3 stock. That is a wash, and the honest reading
-is that I have not demonstrated a latency win.
+Wall clock was 29.9 seconds gated against 29.3 stock. That is a wash, and there is no
+latency win to claim here.
 
-The reason is mundane, and it is my own fault rather than the model's. For this experiment I
-was calling a copy of the model on a remote SageMaker endpoint, from a laptop in a different
-region, so each call cost roughly 350ms of round trip against 50 to 70ms of actual work at
-the far end. Fourteen calls of avoidable network is about the 2.3 seconds saved on the memory
-service, which is why the two arms finish together.
+The cause is the deployment rather than the model. These runs call the model on a remote
+SageMaker endpoint from a laptop in a different region, so each call costs roughly 350ms of
+round trip against 50 to 70ms of real work at the far end. Fourteen calls of avoidable
+network is about the 2.3 seconds saved on the memory service, which is why the two arms
+finish together. The released model is a `pip install` running on the machine you are
+already on at around 153ms, where there is no round trip to pay for, so the column should go
+positive. That configuration is untested here.
 
-That is a deployment choice I made early and should have revisited, because the released
-model does not work that way. It is a `pip install` that runs on the machine you are already
-on, at around 153ms on an M3 MacBook. A local call has no round trip to pay for, so I would
-expect the latency column to go positive. I have not run that configuration, so treat it as
-the obvious next measurement rather than a result.
+The comparison is also unfair to the stock manager in one direction worth naming. It is
+tuned for the general case, and these thresholds are tuned on this store, with these 19
+records, against labels I wrote. A fixed `relevance_score` would look much better on a store
+whose scores were well separated. What this shows is that *this* store defeats a fixed
+threshold, not that fixed thresholds are a bad idea.
 
-The comparison is also unfair to the stock manager in one direction that I should name. It is
-tuned for a general case and I tuned my thresholds on this store, with these 19 records, using
-labels I wrote. A fixed `relevance_score` would also look much better on a store whose scores
-were well separated. I have shown that *this* store defeats a fixed threshold, not that
-fixed thresholds are a bad idea in general.
+The two claims that hold up are the 85% reduction in injected context and five of eight
+memory calls avoided. The rest is direction.
 
-So the two claims I will stand behind are the 85% reduction in injected context and five of
-eight memory calls avoided. Everything else here is direction.
-
-## Failing open hides outages
+## Fail open, and count the failures
 
 Both gates fail open. If the classifier errors, the gate retrieves and the validator keeps
-the batch, so a dead dependency costs you the optimisation rather than the agent's memory.
-I am fairly confident that is the right default.
+the batch, so a dead dependency costs the optimisation rather than the agent's memory. That
+is the right default, and it has a sharp edge. A system that degrades silently to the old
+behaviour is indistinguishable from a system that is working.
 
-It also bit me immediately. Making the endpoint name configurable, I set the default to a
-name that does not exist. Every decision errored, every one failed open, and the demo
-produced entirely correct answers. The only evidence was the stats block reading oddly:
+A single wrong endpoint name is enough to make every decision error, fail open, and still
+produce entirely correct answers. The only trace is a stats block that reads a little oddly:
 
 ```
 gate decisions             8  (open 0, closed 0)
 memory retrievals made     8  (baseline would be 8, saved 0)
 ```
 
-Eight decisions, none of which opened or closed anything. I had to read my own code to
-work out why, which is not a great sign. There is now a counter that says so loudly:
+Eight decisions, none of which opened or closed anything. So the counter is explicit now:
 
 ```
-!! decider errors          16  (failed open -- results below reflect UNGATED behaviour)
+!! decider errors          16  (failed open, results reflect UNGATED behaviour)
 ```
 
-The general lesson, which I suspect generalises past this project, is that fail-open and
-observable are not the same property, and a system that degrades silently to "the old
-behaviour" is indistinguishable from a system that is working. Count the failures.
+Fail-open and observable are not the same property. Count the failures, and put the count
+somewhere you will actually see it.
 
 ## Where that leaves me
 
-The division of labour I end up with is roughly this. The embedding is good at "what in
-this store is about this subject", and that is not the question the agent needs answered on
-a given turn. "Is this worth saying right now" is a judgement against evidence already in
-hand, which seems to be the shape these small classifiers are reliably decent at.
+The division of labour is roughly this. The embedding is good at "what in this store is
+about this subject", which is not the question the agent needs answered on a given turn.
+"Is this worth saying right now" is a judgement against evidence already in hand, and that
+is the shape these small models are reliably decent at.
 
-The thing I did not expect going in is that the gate is both the cheaper half and the
-easier half. Deciding whether to search at all is a judgement about one short message, and
-one carefully worded question got it to 100% on my set. Deciding whether each record
-belongs took four wordings and is where all the threshold fragility sits. If you only build
-one of the two, build the gate.
+The gate is both the cheaper half and the easier half. Deciding whether to search at all is
+a judgement about one short message, and one well worded question takes it to 100% on this
+set. Deciding whether each record belongs needs four wordings and carries all of the
+threshold fragility. Build the gate first.
 
-Three things I have not built and would try next. Run the classifier locally, the way it is
-actually shipped, and settle the latency column properly. Route rather than only gate, since
-the gate is a single `noul` and a `choice` in the same request could pick which namespace is
-worth searching, so a question about drinks never searches travel memories. And see whether
-the ranking signal can replace the absolute threshold, because ranking was stable for both
-models at AUC 1.000 across every run while the thresholds were not. Jev's absolute values
-drifted enough between runs to move its best threshold, though the 2b model's stayed put.
+"Use a decision model for memory" is not a useful instruction on its own. The useful
+instruction is to write the question twice, measure both, and measure ranking separately
+from separation. The mechanism was never the hard part.
 
-So, did we earn the word in the use case list? I think so, with a caveat I would not have
-thought to write before doing this. The mechanism works, and on this store it removed five
-of eight memory calls and 85% of the injected context without costing the agent anything it
-needed. But "use a decision model for memory" is not the useful instruction. The useful
-instruction is "write the question twice, measure both, and measure ranking separately from
-separation", because the first wording I tried was worth 65% and would have made the whole
-thing look like a dead end. The mechanism was never the hard part.
+Three things worth doing next. Run the model locally, the way it actually ships, and settle
+the latency column. Route rather than only gate, since a `choice` in the same request could
+pick which namespace is worth searching, so a question about drinks never searches travel
+memories. And test whether the ranking signal can replace the absolute threshold, because
+ranking held at AUC 1.000 across every run while the thresholds did not. Jev's absolute
+values drifted enough between runs to move its best threshold, though the 2b model's stayed
+put.
 
-A closing warning on the code. It is a subclass reaching into a part of the
-`bedrock-agentcore` SDK that was refactored once while I was working on it. Treat it as a
-spike rather than a library. It will break.
+A warning on the code. It is a subclass reaching into a part of the `bedrock-agentcore` SDK
+that was refactored once during the build. Treat it as a spike rather than a library.
