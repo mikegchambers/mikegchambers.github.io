@@ -173,35 +173,12 @@ The wording I shipped puts relevant records at 0.379 and up and irrelevant at 0.
 down, so the threshold sits at 0.36. The gap is 0.038, narrow enough that it wants retuning
 against any other store.
 
-## Record shape skews the scores
-
-AgentCore's strategies do not return the same shape as each other. `SEMANTIC` gives prose.
-`USER_PREFERENCE` gives JSON:
-
-```json
-{"context": "Ordering a drink or beverage",
- "preference": "Dislikes sparkling water; prefers still water only",
- "categories": ["beverages", "water"]}
-```
-
-The stock manager passes that through as-is and a frontier model copes. The classifier does
-not cope evenly, and the bias is systematic rather than noisy. JSON records score above
-prose records more or less regardless of relevance, so a threshold tuned on prose lets JSON
-through. That is how "always books an aisle seat" survives a question about what to drink.
-
-Rendering both strategies into one prose style first ("When ordering a drink or beverage:
-Dislikes sparkling water; prefers still water only") fixes it. On the drink query the kept
-set goes from 10 records to 7, and the three that drop out are the indentation preference,
-the favourite cuisine and the aisle seat.
-
-That rendering is applied on both sides of the comparison below, so what follows measures
-the gating rather than the tidying up.
-
 ## What it bought
 
 Eight turns, same store, Claude Sonnet 4.5 answering. The baseline arm is the stock
 behaviour, reached by passing `decider=None` so every gate branch is bypassed, rather than
-by running different code.
+by running different code. Both arms render retrieved records into one plain text form
+before anything else happens, so what the table measures is the gating.
 
 | | stock | gated, 2b | gated, Jev |
 | --- | --- | --- | --- |
