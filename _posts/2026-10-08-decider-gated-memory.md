@@ -2,8 +2,8 @@
 title: "Should the agent even look that up?"
 date: 2026-10-08
 categories: [AI, Agents]
-tags: [agents, strands, agentcore, memory, bedrock, classifiers, retrieval]
-description: "The Strands AgentCore Memory session manager searches long term memory on every message and filters it with a fixed score floor. I put a small classifier in front of both decisions. Eight memory calls became three, and 147 injected records became 25, with the answers unchanged."
+tags: [agents, strands, strands-decider, agentcore, memory, bedrock, retrieval]
+description: "We listed memory as a use case when we launched strands-decider. I went and built it: a decision model gating long term memory retrieval in a Strands agent. Eight memory calls became three and 147 injected records became 25, with the answers unchanged. The wording of the question mattered more than anything else."
 image:
   path: /assets/images/decider-gated-memory/score-spread.jpg
   alt: "Long term memory records returned for a query about drink preferences, with relevant and irrelevant records interleaved in a narrow score band"
@@ -13,24 +13,32 @@ image:
 > are on GitHub: **[github.com/mikegc-aws/decider-gated-agentcore-memory](https://github.com/mikegc-aws/decider-gated-agentcore-memory)**.
 > This post is the writeup. The repo lets you re-run any number in it.
 
-*Expertise level: I have read the session manager more carefully than I have read the
-retrieval literature.*
-
 *A caveat up front. What follows is one afternoon's worth of measurement on a synthetic
 memory store, with labels I wrote myself. I have tried to be quantitative where I can, but
-the sets are small enough that you should read direction and not magnitude.*
+the sets are small enough that you should read direction and not magnitude. I should also
+say plainly that I am not a neutral party here, so discount accordingly.*
 
-A while ago Marc Brooker wrote about building
-[strands-decider-2B](https://brooker.co.za/blog/2026/09/28/engineering-system-one.html),
-a small calibrated classifier in the style of TypeSafe's Jev. You hand it some state and
-one or more typed questions, and it hands back probabilities, in tens of milliseconds, with
-extra questions about the same state costing almost nothing. The weights are Apache-2.0 and
-[on HuggingFace](https://huggingface.co/StrandsAgents/strands-decider-2B-hobson-v19).
+I am one of the authors on the [strands-decider launch
+post](https://strandsagents.com/blog/introducing-strands-decider/), along with Marc Brooker
+and Fabio Nonato de Paula. In that post we list the places a decision model earns its keep,
+and memory is one of the words in that list.
 
-Reading that, the thing I wanted to know was where in an agent you would actually put one.
-A model that answers bounded questions quickly is only interesting if there are bounded
-questions sitting on a hot path. So I went looking for one, and the place I landed was
-agent memory.
+Lists are cheap. What a list does not tell you is whether the idea survives contact with a
+real retrieval path, what the question has to look like before it works, or how much of the
+win is still there once you measure it rather than assert it. Writing "memory" in a use case
+list took me about four seconds. So I went and built the memory one properly, to find out
+whether we had earned the word.
+
+A quick description for anyone who has not met it. `strands-decider` is a 2B open source
+decision model, and it does not generate text. You hand it some state and one or more typed questions, and it returns
+probabilities with a calibrated confidence, and extra questions about the same state cost
+almost nothing. Under the hood it is a Qwen3.5-2B torso with the language model head
+replaced by a small pointer head and tuned with a LoRA, which Marc wrote up in detail
+[here](https://brooker.co.za/blog/2026/09/28/engineering-system-one.html). It runs locally.
+`pip install strands-decider`, median latency around 115ms on an RTX 3090 and about 153ms on
+an M3 MacBook, weights and training data on
+[HuggingFace](https://huggingface.co/StrandsAgents), code at
+[strands-labs/strands-decider](https://github.com/strands-labs/strands-decider).
 
 Here is the question I started with. When an agent has long term memory, something has to
 decide what to recall on each turn. Does that decision deserve a model?
@@ -91,6 +99,19 @@ the stock manager put 147 records, roughly 2,500 tokens, into the prompt, includ
 turns "Hello!", "What is 17 times 23?" and "ok cool".
 
 So, two candidate questions for a classifier. Let's take them in order.
+
+I ran everything twice, against `strands-decider` and against TypeSafe's Jev through
+OpenRouter. Both take the same state plus typed questions shape, so the integration has one
+interface and two clients behind it. Partly that is because I wanted a second opinion from a
+model I had no hand in, given I am hardly impartial about the first one, and partly because
+if the gating idea only worked on our model it would be a much less interesting idea.
+
+One structural note before the questions. This is the first of these integrations where I
+could not use a clean extension point. Writing about Jev in Strands last time, six of my
+seven experiments needed no wrapper, no fork and no patch. This one needed a subclass of the
+session manager, overriding `retrieve_customer_context` and nothing else. Seventy lines of
+policy replaced, about 1,300 lines of plumbing inherited untouched, because the write path is
+not the part I am questioning.
 
 ## Question one: is a lookup worth making?
 
@@ -219,12 +240,17 @@ pho with a peanut warning. The gated arm does it on about 15% of the context.
 Wall clock was 29.9 seconds gated against 29.3 stock. That is a wash, and the honest reading
 is that I have not demonstrated a latency win.
 
-The reason is mundane and worth stating so nobody quotes the table at me. I am calling the
-classifier from a laptop in the wrong region, so each call costs roughly 350ms of round trip
-against 50 to 70ms of work at the far end. Fourteen calls of avoidable network is about the
-2.3 seconds saved on the memory service. In region I would expect that to invert, but
-expecting is not measuring, and the in-region number is an inference from documented latency
-rather than something I ran.
+The reason is mundane, and it is my own fault rather than the model's. For this experiment I
+was calling a copy of the model on a remote SageMaker endpoint, from a laptop in a different
+region, so each call cost roughly 350ms of round trip against 50 to 70ms of actual work at
+the far end. Fourteen calls of avoidable network is about the 2.3 seconds saved on the memory
+service, which is why the two arms finish together.
+
+That is a deployment choice I made early and should have revisited, because the released
+model does not work that way. It is a `pip install` that runs on the machine you are already
+on, at around 153ms on an M3 MacBook. A local call has no round trip to pay for, so I would
+expect the latency column to go positive. I have not run that configuration, so treat it as
+the obvious next measurement rather than a result.
 
 The comparison is also unfair to the stock manager in one direction that I should name. It is
 tuned for a general case and I tuned my thresholds on this store, with these 19 records, using
@@ -274,14 +300,22 @@ one carefully worded question got it to 100% on my set. Deciding whether each re
 belongs took four wordings and is where all the threshold fragility sits. If you only build
 one of the two, build the gate.
 
-What I have not built, and would try next, is routing instead of only gating. The gate is a
-single `noul`; a `choice` in the same request could pick which namespace is worth searching,
-so a question about drinks never searches travel memories. Same round trip, so it should be
-nearly free. I would also like to see whether the ranking signal, which was stable for both
-models at AUC 1.000 across every run, can replace the absolute threshold, which was not
-stable. Jev's absolute values drifted enough between runs to move its best threshold, while
-the 2b model's stayed put.
+Three things I have not built and would try next. Run the classifier locally, the way it is
+actually shipped, and settle the latency column properly. Route rather than only gate, since
+the gate is a single `noul` and a `choice` in the same request could pick which namespace is
+worth searching, so a question about drinks never searches travel memories. And see whether
+the ranking signal can replace the absolute threshold, because ranking was stable for both
+models at AUC 1.000 across every run while the thresholds were not. Jev's absolute values
+drifted enough between runs to move its best threshold, though the 2b model's stayed put.
 
-And the code is a subclass of somebody else's session manager, reaching into a part of the
-SDK that was refactored once while I was working on it. Treat it as a spike rather than a
-library. It will break.
+So, did we earn the word in the use case list? I think so, with a caveat I would not have
+thought to write before doing this. The mechanism works, and on this store it removed five
+of eight memory calls and 85% of the injected context without costing the agent anything it
+needed. But "use a decision model for memory" is not the useful instruction. The useful
+instruction is "write the question twice, measure both, and measure ranking separately from
+separation", because the first wording I tried was worth 65% and would have made the whole
+thing look like a dead end. The mechanism was never the hard part.
+
+A closing warning on the code. It is a subclass reaching into a part of the
+`bedrock-agentcore` SDK that was refactored once while I was working on it. Treat it as a
+spike rather than a library. It will break.
